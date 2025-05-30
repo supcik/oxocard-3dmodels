@@ -1,0 +1,27 @@
+import synthesizer
+
+masterVolume(127)
+channel(0)
+
+# Violin; Instrument 41; set: 0
+instrumentSet(0); instrument(41-1)
+noteOn(noteToNum("C4"),127)
+delay(3000)
+noteOff(noteToNum("C4"))
+
+# Telephone Ring; Instrument 125; set: 0
+instrumentSet(0); instrument(125-1) 
+noteOn(noteToNum("C4"),127)
+delay(3000)
+noteOff(noteToNum("C4"))
+
+# Harpsichord; Instrument 7; set: 0
+instrumentSet(0); instrument(7-1)
+noteOn(noteToNum("C4"),127)
+noteOn(noteToNum("E4"),127)
+noteOn(noteToNum("G4"),127)
+delay(3000)
+
+
+allNotesOff()
+

@@ -1,0 +1,27 @@
+import monitor
+
+const SERVO_PIN = C_PIN_05     # Servo on IO01
+
+def initServo():
+    setPWMFrequency(50) # Servo runs on 50Hz
+
+def openLid():
+    dutyCycle = map(35, 90, -90, 102, 512)
+    writePWM(SERVO_PIN, dutyCycle)
+
+def closeLid():
+    dutyCycle = map(-80, 90, -90, 102, 512)
+    writePWM(SERVO_PIN, dutyCycle)
+
+initServo()
+closeLid()
+
+def onClick():
+    btn = getButtons()
+    if btn.up:
+        closeLid()
+    if btn.down:
+        openLid()
+        
+    
+    

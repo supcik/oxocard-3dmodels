@@ -1,0 +1,51 @@
+const MAX_TEXT = 20 # 5..30
+const ROW_WIDTH = 20 # 10..40
+const ROW_COUNT = 240 / ROW_WIDTH
+const RAIN_COLOR = 78 # HUE
+
+digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+*%="
+
+class RainDrop:
+    pos:vector
+    len:byte
+    text:byte[MAX_TEXT]
+    velocity:byte
+
+    def init(initialColumn:int):
+        pos = vector(x=initialColumn*ROW_WIDTH,y=random(-200,0))
+        
+        velocity = random(5,20)
+        len = random(4,MAX_TEXT)
+        pos.y = pos.y - (len*16)
+        for i in len:
+            text[i] = digits[random(0,strLen(digits))]
+    def step():
+        pos.y+=velocity
+        if pos.y > 240: init(pos.x / ROW_WIDTH)
+        charpos = random(0,len)
+        text[charpos] = digits[random(0,strLen(digits))]
+    
+    def draw():
+        push()
+        textFont(FONT_ROBOTO_16)
+        translate(pos.x,pos.y)
+        strokeHSV(RAIN_COLOR,255,map(velocity,5,20,100,255))
+        for i in len:   
+            buf:byte[2]
+            buf[0] = text[i]
+            buf[1] = 0
+            drawText(0,i*16,buf)
+        pop()
+
+rainDrops:RainDrop[24]
+
+for i in sizeof(rainDrops):
+    rainDrops[i].init(i)
+
+def onDraw():
+    clear()
+    for i in sizeof(rainDrops):
+        rainDrops[i].step()
+        rainDrops[i].draw()
+    update()
+    delay(20)

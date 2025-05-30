@@ -1,0 +1,17 @@
+setTimeZone("CET-1CEST,M3.5.0,M10.5.0/3") # Europe/Zurich
+#setTimeZone("PST8PDT,M3.2.0,M11.1.0") # Americas / Los Angeles
+
+def onDraw():
+    clear()
+    textFont(FONT_ROBOTO_80)
+    h = getHour()
+    m = getMinute()
+    hz = ""
+    if h < 10: hz = "0"
+    mz = ""
+    if m < 10: mz = "0"
+
+    time = hz + h + ":" + mz + m
+    drawTextCentered(120,120, time)
+    update()
+    delay(1000)
